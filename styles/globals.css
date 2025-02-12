@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Variables de color para la paleta futurista */
+:root {
+  --background: #2d005a; /* Morado oscuro */
+  --foreground: #ffffff;
+}
+
+/* Personalización base utilizando @layer para mayor control */
+@layer base {
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: var(--background);
+    color: var(--foreground);
+  }
+}
+
+/* Animación de fadeIn para fondos */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate-fadeIn {
+  animation: fadeIn 3s ease-in-out infinite alternate;
+}
+
+/* Fondo radial sutil para detalles futuristas */
+.bg-radial-gradient {
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.1),
+    transparent 70%
+  );
+}
+
+/* Animación lenta de pulso (opcional para efectos de fondo) */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.animate-pulse-slow {
+  animation: pulse 7s infinite;
+}
