@@ -2,53 +2,118 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Variables de color para la paleta futurista */
 :root {
-  --background: #2d005a; /* Morado oscuro */
-  --foreground: #ffffff;
+  --background: #0a0e1a;
+  --foreground: #e0f2fe;
+  --neon-cyan: #00f7ff;
+  --space-purple: #2d005a;
+  --stardust: rgba(255, 255, 255, 0.1);
 }
 
-/* Personalización base utilizando @layer para mayor control */
+@keyframes gradient-x {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes starlight {
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+@keyframes nebula-pulse {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 @layer base {
   body {
-    font-family: 'Roboto', sans-serif;
-    background: var(--background);
-    color: var(--foreground);
+    @apply bg-[var(--background)] text-[var(--foreground)] font-sans;
+    background-image: 
+      radial-gradient(var(--stardust) 1px, transparent 1px),
+      radial-gradient(var(--stardust) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: 0 0, 25px 25px;
   }
 }
 
-/* Animación de fadeIn para fondos */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+@layer components {
+  .glass-effect {
+    @apply backdrop-blur-xl bg-gradient-to-b from-[rgba(45,0,90,0.3)] to-[rgba(0,247,255,0.1)];
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
   }
-  to {
-    opacity: 1;
+
+  .cosmic-bg {
+    background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
   }
-}
-.animate-fadeIn {
-  animation: fadeIn 3s ease-in-out infinite alternate;
+
+  .cosmic-glow {
+    text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+  }
+
+  .cosmic-button {
+    background: linear-gradient(45deg, #4F46E5 0%, #9333EA 100%);
+    box-shadow: 0 0 40px rgba(79, 70, 229, 0.3);
+  }
+
+  .cosmic-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #4F46E5, transparent);
+  }
+
+  .cosmic-title {
+    background: linear-gradient(45deg, #22D3EE 30%, #3B82F6 70%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
-/* Fondo radial sutil para detalles futuristas */
-.bg-radial-gradient {
-  background: radial-gradient(
-    circle at center,
-    rgba(255, 255, 255, 0.1),
-    transparent 70%
-  );
-}
+@layer utilities {
+  .animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradient-x 15s ease infinite;
+  }
 
-/* Animación lenta de pulso (opcional para efectos de fondo) */
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 0.8;
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
   }
-  50% {
-    opacity: 1;
+
+  .animate-pulse-slow {
+    animation: pulse-glow 3s ease infinite;
   }
-}
-.animate-pulse-slow {
-  animation: pulse 7s infinite;
+
+  .text-space-glow {
+    text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+  }
+
+  .cosmic-text-outline {
+    text-shadow: 
+      -1px -1px 0 #00f7ff,
+      1px -1px 0 #00f7ff,
+      -1px 1px 0 #00f7ff,
+      1px 1px 0 #00f7ff;
+  }
+
+  .cosmic-text-shine {
+    background: linear-gradient(45deg, #00f7ff, #4F46E5, #00f7ff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-x 5s linear infinite;
+  }
 }

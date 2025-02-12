@@ -1,12 +1,15 @@
-import React from 'react';
+"use client";
+
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, Sparkles } from 'lucide-react';
+import React from 'react';
 
 interface CardProps {
   title: string;
   description: string;
   features: string[];
   cost: string;
+  className?: string;
   icon?: React.ElementType;
   accentColor?: string;
   hoverEffect?: 'shine' | 'float';
@@ -17,6 +20,7 @@ const Card: React.FC<CardProps> = ({
   description,
   features,
   cost,
+  className = '',
   icon: Icon = Sparkles,
   accentColor = '#06b6d4',
   hoverEffect = 'shine',
@@ -27,7 +31,7 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <motion.div
-      className="group relative w-full max-w-2xl p-px rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl"
+      className={`group relative w-full max-w-2xl p-px rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl ${className}`}
       style={gradientStyle}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}

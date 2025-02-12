@@ -1,19 +1,27 @@
 import { motion } from "framer-motion";
 import { useMemo } from "react";
 
-const ParticleBackground = () => {
+interface ParticleBackgroundProps {
+  particleCount?: number;
+  particleColor?: string;
+}
+
+const ParticleBackground: React.FC<ParticleBackgroundProps> = ({
+  particleCount = 20,  // Reducido a 20 partículas
+  particleColor = '#a78bfa'  // Color más suave
+}) => {
   const particles = useMemo(
     () =>
-      Array.from({ length: 35 }).map(() => ({
+      Array.from({ length: particleCount }).map(() => ({
         top: `${Math.random() * 100}%`,
         left: `${Math.random() * 100}%`,
-        size: Math.random() * 4 + 2, // Tamaños entre 2px y 6px
-        x: (Math.random() - 0.5) * 200, // Mayor desplazamiento
-        y: (Math.random() - 0.5) * 150, // Movimiento más amplio
+        size: Math.random() * 3 + 1, // Tamaño más pequeño (1px a 4px)
+        x: (Math.random() - 0.5) * 100, // Movimiento más suave
+        y: (Math.random() - 0.5) * 50,  // Menor rango de movimiento
         delay: Math.random() * 2,
-        duration: 3 + Math.random() * 5,
+        duration: 2 + Math.random() * 3, // Animación más rápida
       })),
-    []
+    [particleCount]
   );
 
   return (
@@ -21,17 +29,19 @@ const ParticleBackground = () => {
       {particles.map((p, i) => (
         <motion.div
           key={i}
-          className="absolute bg-purple-400 rounded-full opacity-80"
+          className="absolute rounded-full"
           style={{
             top: p.top,
             left: p.left,
             width: `${p.size}px`,
             height: `${p.size}px`,
+            backgroundColor: particleColor,
+            opacity: 0.4 // Opacidad reducida
           }}
           animate={{
             x: [0, p.x, 0],
             y: [0, p.y, 0],
-            opacity: [0.8, 0.4, 0.8],
+            opacity: [0.6, 0.2, 0.6] // Variación de opacidad más suave
           }}
           transition={{
             duration: p.duration,
